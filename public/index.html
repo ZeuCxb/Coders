@@ -18,7 +18,7 @@
 		<link rel="stylesheet" type="text/css" href="./dist/css/dist.min.css">
 
 	</head>
-	<body>
+	<body ng-controller="appCtrl as ctrl">
 		<nav class="navbar navbar-default navbar-fixed-top">
 		  <div class="container-fluid">
 				<div class="navbar-header">
@@ -34,25 +34,20 @@
 		    </div>
 				<div class="collapse navbar-collapse" id="nav-top" aria-expanded="false">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Home</a></li>
-						<li><a href="#">Link</a></li>
-						<li><a href="#">Link</a></li>
+						<li><a ng-href="#/">Home</a></li>
+						<li><a ng-href="#/teste">Page 2</a></li>
 					</ul>
 				</div>
 		  </div>
 		</nav>
 
 		<section>
-			<ol class="breadcrumb">
-			  <li><a href="#">Home</a></li>
-			  <li><a href="#">Library</a></li>
-			  <li class="active">Data</li>
-			</ol>
-
 			<div ng-view class="page"></div>
 
 			<footer>
-				FOOTER
+				<div class="container">
+					FOOTER
+				</div>
 			</footer>
 		</section>
 	</body>

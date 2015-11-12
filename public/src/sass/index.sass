@@ -1,16 +1,13 @@
 @import colors
 
-*
-	margin: 0
-	padding: 0
-
 body
 	background-color: $purple
 	color: $white
 
 // Nav
-.navbar-fixed-top
-	border-width: 0 0
+
+nav
+	border-bottom: 1px solid $dgrey
 
 nav .nav li a
 	color: $purple !important
@@ -51,22 +48,19 @@ nav i
 nav i:hover
 	color: $lpurple
 
-// Breadcrumb
-.breadcrumb
-	border-radius: 0
-
-.breadcrumb a
-	color: $purple
-
-.breadcrumb>li+li:before
-	color: $purple
-
-.breadcrumb>.active
-	color: $lpurple
-
 section
-	margin-top: 55px
+	margin-top: 50px
 
 .page
+	background-color: $white
+	min-height: 700px
+	color: $purple
+	padding-top: 10px
+	padding-bottom: 10px
 
 footer
+	background-color: $grey
+	color: $purple
+	padding-top: 10px
+	padding-bottom: 10px
+	border-top: 1px solid $dgrey
