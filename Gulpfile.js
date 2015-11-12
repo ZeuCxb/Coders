@@ -85,7 +85,6 @@ gulp.task('appfcoffee', function() {
 			.pipe(gulp.dest('./app/js'));
 });
 
-
 // Tarefa default
 gulp.task('default', function(callback) {
 
