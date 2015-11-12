@@ -1,4 +1,4 @@
-angular.module('coders').controller('titleCtrl', [
+angular.module('coders').controller('appCtrl', [
   function() {
     var self;
     self = this;

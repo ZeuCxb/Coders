@@ -3,6 +3,8 @@ angular.module 'coders', ['ngRoute']
 		'$routeProvider', ($routeProvider) ->
 			$routeProvider.when '/',
 				templateUrl: 'views/home.html'
+			$routeProvider.when '/teste',
+				templateUrl: 'views/teste.html'
 			.otherwise
 				redirectTo: '/'
 
