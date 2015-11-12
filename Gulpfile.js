@@ -33,10 +33,10 @@ gulp.task('lint', function() {
 gulp.task('dist', function() {
 	// Selecionar arquivos e rodar tarefas
 	return gulp.src(jsfiles)
-			.pipe(concat('./public/public/dist/js'))
+			.pipe(concat('./public/dist/js'))
 			.pipe(rename('dist.min.js'))
 			.pipe(uglify())
-			.pipe(gulp.dest('./public/public/dist/js'));
+			.pipe(gulp.dest('./public/dist/js'));
 });
 
 // Nova tarefa: coffee
