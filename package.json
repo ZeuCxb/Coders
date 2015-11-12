@@ -1,0 +1,20 @@
+{
+  "name": "ifchat",
+  "version": "1.0.0",
+  "description": "Chat do IF",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ZeuCxb",
+  "license": "ISC",
+  "devDependencies": {
+    "bower": "^1.6.5"
+  },
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "express": "^4.13.3",
+    "express-load": "^1.1.15",
+    "method-override": "^2.3.5"
+  }
+}
