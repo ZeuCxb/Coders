@@ -4,44 +4,25 @@ body {
 
 nav {
   border-bottom: 1px solid #f0f0f0; }
+  nav .nav.navbar-nav li a {
+    color: #303; }
+  nav .nav.navbar-nav li a:hover, nav .nav.navbar-nav li a:active, nav .nav.navbar-nav li a:focus {
+    color: #FFF;
+    background-color: #303; }
+  nav .navbar-header button.navbar-toggle, nav .navbar-header button.navbar-toggle.collapsed:hover, nav .navbar-header button.navbar-toggle:active, nav .navbar-header button.navbar-toggle:hover, nav .navbar-header button.navbar-toggle:focus {
+    background-color: #303; }
+    nav .navbar-header button.navbar-toggle span.icon-bar, nav .navbar-header button.navbar-toggle.collapsed:hover span.icon-bar, nav .navbar-header button.navbar-toggle:active span.icon-bar, nav .navbar-header button.navbar-toggle:hover span.icon-bar, nav .navbar-header button.navbar-toggle:focus span.icon-bar {
+      background-color: #FFF; }
+  nav .navbar-header button.navbar-toggle.collapsed {
+    background-color: #FFF; }
+    nav .navbar-header button.navbar-toggle.collapsed span.icon-bar {
+      background-color: #303; }
 
-nav .nav li a {
-  color: #303 !important; }
-
-.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover {
-  background-color: #303;
-  color: #FFF !important; }
-
-.navbar-collapse.collapse.in, .navbar-collapse.collapsing {
-  margin-top: 12px; }
-
-.navbar-default .navbar-collapse, .navbar-default .navbar-form {
-  border: none; }
-
-.navbar-default .navbar-toggle .icon-bar {
-  background-color: #303; }
-
-.navbar-default .navbar-toggle:hover .icon-bar, .navbar-default .navbar-toggle:focus .icon-bar {
-  background-color: #FFF; }
-
-.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
-  background-color: #303; }
-
-button.navbar-toggle.collapsed {
-  background-color: #f8f8f8; }
-
-ul.nav.navbar-nav {
-  background-color: #f8f8f8 !important; }
-
-.navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover {
-  background-color: #303;
-  color: #FFF !important; }
-
-nav i {
+nav .navbar-header a.navbar-brand, nav .navbar-header a.navbar-brand:active, nav .navbar-header a.navbar-brand:focus {
   color: #303; }
 
-nav i:hover {
-  color: #7B0D7B; }
+nav .navbar-header a.navbar-brand:hover {
+  color: #000; }
 
 section {
   margin-top: 50px; }
@@ -52,6 +33,8 @@ section {
   color: #303;
   padding-top: 10px;
   padding-bottom: 10px; }
+  .page p {
+    color: #000; }
 
 footer {
   background-color: #f8f8f8;

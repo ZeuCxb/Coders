@@ -1,56 +1,48 @@
 @import colors
 
+// Body
 body
 	background-color: $purple
 	color: $white
 
 // Nav
-
 nav
 	border-bottom: 1px solid $dgrey
 
-nav .nav li a
-	color: $purple !important
+	.nav.navbar-nav li a
+		color: $purple
 
-.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover
-	background-color: $purple
-	color: $white !important
+	.nav.navbar-nav li a:hover, .nav.navbar-nav li a:active, .nav.navbar-nav li a:focus
+		color: $white
+		background-color: $purple
 
-.navbar-collapse.collapse.in, .navbar-collapse.collapsing
-	margin-top: 12px
+	.navbar-header
+		button.navbar-toggle, button.navbar-toggle.collapsed:hover, button.navbar-toggle:active, button.navbar-toggle:hover, button.navbar-toggle:focus
+			background-color: $purple
 
-.navbar-default .navbar-collapse, .navbar-default .navbar-form
-	border: none
+			span.icon-bar
+				background-color: $white
 
-.navbar-default .navbar-toggle .icon-bar
-	background-color: $purple
+		button.navbar-toggle.collapsed
+			background-color: $white
 
-.navbar-default .navbar-toggle:hover .icon-bar, .navbar-default .navbar-toggle:focus .icon-bar
-	background-color: $white
-
-.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover
-	background-color: $purple
-
-button.navbar-toggle.collapsed
-	background-color: $grey
-
-ul.nav.navbar-nav
-	background-color: $grey !important
-
-.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover
-	background-color: $purple
-	color: $white !important
+			span.icon-bar
+				background-color: $purple
 
 // Logo
-nav i
-	color: $purple
+nav
+	.navbar-header
+		a.navbar-brand, a.navbar-brand:active, a.navbar-brand:focus
+			color: $purple
 
-nav i:hover
-	color: $lpurple
+		a.navbar-brand:hover
+			color: $black
 
+// Section
 section
 	margin-top: 50px
 
+// Page
 .page
 	background-color: $white
 	min-height: 700px
@@ -58,6 +50,10 @@ section
 	padding-top: 10px
 	padding-bottom: 10px
 
+	p
+		color: $black
+
+// Footer
 footer
 	background-color: $grey
 	color: $purple
