@@ -24,6 +24,14 @@ nav .navbar-header a.navbar-brand, nav .navbar-header a.navbar-brand:active, nav
 nav .navbar-header a.navbar-brand:hover {
   color: #000; }
 
+nav .navbar-header .navbar-brand {
+  padding-top: 0; }
+
+nav .navbar-header a img {
+  height: 50px; }
+  nav .navbar-header a img:hover {
+    transform: scale(1.1); }
+
 section {
   margin-top: 50px; }
 
