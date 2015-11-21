@@ -11,19 +11,18 @@ nav
 
 	.nav.navbar-nav li a
 		color: $purple
-
-	.nav.navbar-nav li a:hover, .nav.navbar-nav li a:active, .nav.navbar-nav li a:focus
-		color: $white
-		background-color: $purple
+		&:hover, &:active, &:focus
+			color: $white
+			background-color: $purple
 
 	.navbar-header
-		button.navbar-toggle, button.navbar-toggle.collapsed:hover, button.navbar-toggle:active, button.navbar-toggle:hover, button.navbar-toggle:focus
+		button.navbar-toggle, button.collapsed:hover, button.navbar-toggle:active, button.navbar-toggle:hover, button.navbar-toggle:focus
 			background-color: $purple
 
 			span.icon-bar
 				background-color: $white
 
-		button.navbar-toggle.collapsed
+		button.collapsed
 			background-color: $white
 
 			span.icon-bar
@@ -34,9 +33,8 @@ nav
 	.navbar-header
 		a.navbar-brand, a.navbar-brand:active, a.navbar-brand:focus
 			color: $purple
-
-		a.navbar-brand:hover
-			color: $black
+			&:hover
+				color: $black
 
 		.navbar-brand
 			padding-top: 0

@@ -6,23 +6,22 @@ nav {
   border-bottom: 1px solid #f0f0f0; }
   nav .nav.navbar-nav li a {
     color: #303; }
-  nav .nav.navbar-nav li a:hover, nav .nav.navbar-nav li a:active, nav .nav.navbar-nav li a:focus {
-    color: #FFF;
+    nav .nav.navbar-nav li a:hover, nav .nav.navbar-nav li a:active, nav .nav.navbar-nav li a:focus {
+      color: #FFF;
+      background-color: #303; }
+  nav .navbar-header button.navbar-toggle, nav .navbar-header button.collapsed:hover, nav .navbar-header button.navbar-toggle:active, nav .navbar-header button.navbar-toggle:hover, nav .navbar-header button.navbar-toggle:focus {
     background-color: #303; }
-  nav .navbar-header button.navbar-toggle, nav .navbar-header button.navbar-toggle.collapsed:hover, nav .navbar-header button.navbar-toggle:active, nav .navbar-header button.navbar-toggle:hover, nav .navbar-header button.navbar-toggle:focus {
-    background-color: #303; }
-    nav .navbar-header button.navbar-toggle span.icon-bar, nav .navbar-header button.navbar-toggle.collapsed:hover span.icon-bar, nav .navbar-header button.navbar-toggle:active span.icon-bar, nav .navbar-header button.navbar-toggle:hover span.icon-bar, nav .navbar-header button.navbar-toggle:focus span.icon-bar {
+    nav .navbar-header button.navbar-toggle span.icon-bar, nav .navbar-header button.collapsed:hover span.icon-bar, nav .navbar-header button.navbar-toggle:active span.icon-bar, nav .navbar-header button.navbar-toggle:hover span.icon-bar, nav .navbar-header button.navbar-toggle:focus span.icon-bar {
       background-color: #FFF; }
-  nav .navbar-header button.navbar-toggle.collapsed {
+  nav .navbar-header button.collapsed {
     background-color: #FFF; }
-    nav .navbar-header button.navbar-toggle.collapsed span.icon-bar {
+    nav .navbar-header button.collapsed span.icon-bar {
       background-color: #303; }
 
 nav .navbar-header a.navbar-brand, nav .navbar-header a.navbar-brand:active, nav .navbar-header a.navbar-brand:focus {
   color: #303; }
-
-nav .navbar-header a.navbar-brand:hover {
-  color: #000; }
+  nav .navbar-header a.navbar-brand:hover, nav .navbar-header a.navbar-brand:active:hover, nav .navbar-header a.navbar-brand:focus:hover {
+    color: #000; }
 
 nav .navbar-header .navbar-brand {
   padding-top: 0; }
