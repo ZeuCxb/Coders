@@ -4,6 +4,7 @@
 body
 	background-color: $purple
 	color: $white
+	font-family: Tahoma, Arial, sans-serif
 
 // Nav
 nav
@@ -11,12 +12,18 @@ nav
 
 	.nav.navbar-nav li a
 		color: $purple
-		&:hover, &:active, &:focus
+		&:hover
 			color: $white
 			background-color: $purple
 
+	.nav.navbar-nav li a.active
+		color: $white
+		background-color: $purple
+		&:hover
+			background-color: $lpurple
+
 	.navbar-header
-		button.navbar-toggle, button.collapsed:hover, button.navbar-toggle:active, button.navbar-toggle:hover, button.navbar-toggle:focus
+		button.navbar-toggle, button.collapsed:hover, button.navbar-toggle:hover, button.navbar-toggle:focus
 			background-color: $purple
 
 			span.icon-bar
@@ -31,7 +38,7 @@ nav
 // Logo
 nav
 	.navbar-header
-		a.navbar-brand, a.navbar-brand:active, a.navbar-brand:focus
+		a.navbar-brand
 			color: $purple
 			&:hover
 				color: $black
