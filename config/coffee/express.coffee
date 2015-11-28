@@ -1,4 +1,8 @@
 express = require 'express'
+redis = require 'redis'
+session = require 'express-session'
+redisStore = require('connect-redis')(session)
+client = redis.createClient()
 load = require 'express-load'
 bodyParser = require 'body-parser'
 
@@ -9,6 +13,13 @@ module.exports = ->
 
 	app.set 'view engine', 'ejs'
 	app.set 'views', './app/views'
+
+	app.use session (
+    secret: 'pepo'
+    store: new redisStore({ host: 'localhost', port: 6379, client: client})
+    saveUninitialized: false
+    resave: false
+		)
 
 	app.use express.static './public'
 	app.use bodyParser.urlencoded extended: true

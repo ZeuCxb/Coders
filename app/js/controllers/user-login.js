@@ -20,16 +20,25 @@ module.exports = function(app) {
         }
       ]
     }).exec().then(function(user) {
+      var r;
+      r = {};
       if (user !== null) {
         return bcrypt.compare(pass, user.pass, function(rq, rs) {
           if (rs) {
-            return res.json(user);
+            r.status = 'success';
+            r.data = user;
+            req.session._id = user._id;
+            return res.status(200).json(r);
           } else {
-            return res.json('pass error');
+            r.status = 'error';
+            r.data = 'pass error';
+            return res.status(500).json(r);
           }
         });
       } else {
-        return res.json('login error');
+        r.status = 'error';
+        r.data = 'login error';
+        return res.status(500).json(r);
       }
     }, function(error) {
       console.error(error);
@@ -43,7 +52,10 @@ module.exports = function(app) {
       return bcrypt.hash(user.pass, salt, function(err, hash) {
         user.pass = hash;
         return userLogin.create(user).then(function(user) {
-          return res.status(201).json(user);
+          r.status = 'success';
+          r.data = user;
+          req.session._id = user._id;
+          return res.status(201).json(r);
         }, function(error) {
           console.error(error);
           return res.status(500).json(error);

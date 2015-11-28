@@ -14,14 +14,27 @@ module.exports = (app) ->
     userLogin.findOne $or: [{email: login}, {nick: login}]
       .exec()
       .then (user) ->
+        r = {}
+
         if user != null
           bcrypt.compare pass, user.pass, (rq, rs) ->
             if rs
-              res.json user
+              r.status = 'success'
+              r.data = user
+
+              req.session._id = user._id
+
+              res.status(200).json r
             else
-              res.json 'pass error'
+              r.status = 'error'
+              r.data = 'pass error'
+
+              res.status(500).json r
         else
-          res.json 'login error'
+          r.status = 'error'
+          r.data = 'login error'
+
+          res.status(500).json r
       , (error) ->
         console.error error
         res.status(500).json error
@@ -35,7 +48,12 @@ module.exports = (app) ->
         user.pass = hash
         userLogin.create user
           .then (user) ->
-            res.status(201).json user
+            r.status = 'success'
+            r.data = user
+
+            req.session._id = user._id
+
+            res.status(201).json r
           , (error) ->
             console.error error
             res.status(500).json error
