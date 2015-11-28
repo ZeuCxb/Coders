@@ -19,6 +19,7 @@ var sfiles = './public/src/sass/**/*.sass';
 var cssfiles = './public/src/css/**/*.css';
 
 var appfile = './app.coffee';
+var configcoffee = './config/coffee/*.coffee';
 var appfiles = './app/coffee/**/*.coffee';
 
 // Nova tarafa: lint
@@ -79,6 +80,13 @@ gulp.task('appcoffee', function() {
 });
 
 // Nova tarefa: coffee
+gulp.task('configcoffee', function() {
+	return gulp.src(configcoffee)
+			.pipe(coffee({bare: true}).on('error', gutil.log))
+			.pipe(gulp.dest('./config/js'));
+});
+
+// Nova tarefa: coffee
 gulp.task('appfcoffee', function() {
 	return gulp.src(appfiles)
 			.pipe(coffee({bare: true}).on('error', gutil.log))
@@ -88,7 +96,7 @@ gulp.task('appfcoffee', function() {
 // Tarefa default
 gulp.task('default', function(callback) {
 
-	runSequence(['appcoffee', 'appfcoffee', 'coffee'], ['lint', 'dist'], 'sass', ['lintCss', 'distCss']);
+	runSequence(['appcoffee', 'appfcoffee', 'coffee', 'configcoffee'], ['lint', 'dist'], 'sass', ['lintCss', 'distCss']);
 
 	watch(jsfiles, function() {
 		runSequence(['lint', 'dist']);
@@ -108,6 +116,10 @@ gulp.task('default', function(callback) {
 
 	watch(appfile, function() {
 		gulp.run('appcoffee');
+	});
+
+	watch(configcoffee, function() {
+		gulp.run('configcoffee');
 	});
 
 	watch(appfiles, function() {
