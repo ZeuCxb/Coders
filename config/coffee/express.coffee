@@ -23,6 +23,6 @@ module.exports = ->
 		.into app
 
 	app.get '*', (req, res) ->
-		res.status(404).json '404'
+		res.status(404).render '404'
 
 	return app
