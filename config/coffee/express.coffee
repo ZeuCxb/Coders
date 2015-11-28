@@ -17,7 +17,7 @@ module.exports = ->
 
 	app.disable 'x-powered-by'
 
-	load 'models', cwd: 'app'
+	load 'models', cwd: './app/js'
 		.then 'controllers'
 		.then 'routes'
 		.into app

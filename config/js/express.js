@@ -20,7 +20,7 @@ module.exports = function() {
   app.use(require('method-override')());
   app.disable('x-powered-by');
   load('models', {
-    cwd: 'app'
+    cwd: './app/js'
   }).then('controllers').then('routes').into(app);
   app.get('*', function(req, res) {
     return res.status(404).render('404');
