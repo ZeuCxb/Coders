@@ -28,5 +28,5 @@ module.exports = function() {
       }
     }
   });
-  return mongoose.model('UserLogin', schema);
+  return mongoose.model('userLogin', schema);
 };
