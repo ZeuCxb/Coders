@@ -6,3 +6,6 @@ module.exports = (app) ->
 
   app.route '/register'
     .post controller.register
+
+  app.route '/logout'
+    .get controller.logout

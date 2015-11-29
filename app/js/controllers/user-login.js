@@ -27,7 +27,7 @@ module.exports = function(app) {
           if (rs) {
             r.status = 'success';
             r.data = user;
-            req.session._id = user._id;
+            req.session.key = r;
             return res.status(200).json(r);
           } else {
             r.status = 'error';
@@ -54,7 +54,7 @@ module.exports = function(app) {
         return userLogin.create(user).then(function(user) {
           r.status = 'success';
           r.data = user;
-          req.session._id = user._id;
+          req.session.key = r;
           return res.status(201).json(r);
         }, function(error) {
           console.error(error);
@@ -62,6 +62,15 @@ module.exports = function(app) {
         });
       });
     });
+  };
+  controller.logout = function(req, res) {
+    if (req.session.key) {
+      return req.session.destroy(function() {
+        return res.redirect('/');
+      });
+    } else {
+      return res.redirect('/');
+    }
   };
   return controller;
 };

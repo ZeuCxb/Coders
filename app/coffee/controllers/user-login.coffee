@@ -22,7 +22,7 @@ module.exports = (app) ->
               r.status = 'success'
               r.data = user
 
-              req.session._id = user._id
+              req.session.key = r
 
               res.status(200).json r
             else
@@ -51,11 +51,19 @@ module.exports = (app) ->
             r.status = 'success'
             r.data = user
 
-            req.session._id = user._id
+            req.session.key = r
 
             res.status(201).json r
           , (error) ->
             console.error error
             res.status(500).json error
+
+  # Logout
+  controller.logout = (req, res) ->
+    if req.session.key
+      req.session.destroy ->
+        res.redirect '/'
+    else
+      res.redirect '/'
 
   return controller
