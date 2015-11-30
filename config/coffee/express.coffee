@@ -9,7 +9,7 @@ bodyParser = require 'body-parser'
 module.exports = ->
 	app = express()
 
-	app.set 'port', 3000
+	app.set 'port', 5000
 
 	app.set 'view engine', 'ejs'
 	app.set 'views', './app/views'
