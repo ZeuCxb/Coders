@@ -22,12 +22,12 @@ module.exports = function(app) {
     }).exec().then(function(user) {
       var r;
       r = {};
-      if (user !== null) {
+      if (user !== null && !req.session._id) {
         return bcrypt.compare(pass, user.pass, function(rq, rs) {
           if (rs) {
             r.status = 'success';
             r.data = user;
-            req.session.key = r;
+            req.session.data = r.data;
             return res.status(200).json(r);
           } else {
             r.status = 'error';
@@ -54,7 +54,7 @@ module.exports = function(app) {
         return userLogin.create(user).then(function(user) {
           r.status = 'success';
           r.data = user;
-          req.session.key = r;
+          req.session.data = r.data;
           return res.status(201).json(r);
         }, function(error) {
           console.error(error);
@@ -64,7 +64,7 @@ module.exports = function(app) {
     });
   };
   controller.logout = function(req, res) {
-    if (req.session.key) {
+    if (req.session._id) {
       return req.session.destroy(function() {
         return res.redirect('/');
       });

@@ -16,13 +16,13 @@ module.exports = (app) ->
       .then (user) ->
         r = {}
 
-        if user != null
+        if user != null and !req.session._id
           bcrypt.compare pass, user.pass, (rq, rs) ->
             if rs
               r.status = 'success'
               r.data = user
 
-              req.session.key = r
+              req.session.data = r.data
 
               res.status(200).json r
             else
@@ -51,7 +51,7 @@ module.exports = (app) ->
             r.status = 'success'
             r.data = user
 
-            req.session.key = r
+            req.session.data = r.data
 
             res.status(201).json r
           , (error) ->
@@ -60,7 +60,7 @@ module.exports = (app) ->
 
   # Logout
   controller.logout = (req, res) ->
-    if req.session.key
+    if req.session._id
       req.session.destroy ->
         res.redirect '/'
     else
