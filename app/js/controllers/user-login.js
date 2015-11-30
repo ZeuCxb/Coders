@@ -1,6 +1,8 @@
-var bcrypt;
+var bcrypt, request;
 
 bcrypt = require('bcrypt');
+
+request = require('request-coders-api');
 
 module.exports = function(app) {
   var controller, userLogin;
@@ -21,23 +23,20 @@ module.exports = function(app) {
       ]
     }).exec().then(function(user) {
       var r;
-      r = {};
-      if (user !== null && !req.session._id) {
+      if (user !== null && !req.session.data) {
         return bcrypt.compare(pass, user.pass, function(rq, rs) {
+          var r;
           if (rs) {
-            r.status = 'success';
-            r.data = user;
+            r = request.req('success', 'login success', user);
             req.session.data = r.data;
             return res.status(200).json(r);
           } else {
-            r.status = 'error';
-            r.data = 'pass error';
+            r = request.req('error', 'pass error');
             return res.status(500).json(r);
           }
         });
       } else {
-        r.status = 'error';
-        r.data = 'login error';
+        r = request.req('error', 'login error');
         return res.status(500).json(r);
       }
     }, function(error) {
@@ -46,25 +45,36 @@ module.exports = function(app) {
     });
   };
   controller.register = function(req, res) {
-    var user;
+    var r, user;
     user = req.body.user;
-    return bcrypt.genSalt(10, function(err, salt) {
-      return bcrypt.hash(user.pass, salt, function(err, hash) {
-        user.pass = hash;
-        return userLogin.create(user).then(function(user) {
-          r.status = 'success';
-          r.data = user;
-          req.session.data = r.data;
-          return res.status(201).json(r);
-        }, function(error) {
-          console.error(error);
-          return res.status(500).json(error);
+    if (req.headers['content-type'] === 'application/json') {
+      if (user !== null && !req.session.data) {
+        return bcrypt.genSalt(10, function(err, salt) {
+          return bcrypt.hash(user.pass, salt, function(err, hash) {
+            user.pass = hash;
+            return userLogin.create(user).then(function(user) {
+              var r;
+              r = request.req('success', 'register success', user);
+              req.session.data = r.data;
+              return res.status(201).json(r);
+            }, function(error) {
+              var r;
+              r = request.req('error', 'register error', error);
+              return res.status(500).json(r);
+            });
+          });
         });
-      });
-    });
+      } else {
+        r = request.req('error', 'register error');
+        return res.status(500).json(r);
+      }
+    } else {
+      r = request.req('error', 'header error');
+      return res.status(500).json(r);
+    }
   };
   controller.logout = function(req, res) {
-    if (req.session._id) {
+    if (req.session.data) {
       return req.session.destroy(function() {
         return res.redirect('/');
       });

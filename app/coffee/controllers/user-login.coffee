@@ -1,4 +1,5 @@
 bcrypt = require 'bcrypt'
+request = require 'request-coders-api'
 
 module.exports = (app) ->
   userLogin = app.models.userLogin
@@ -14,25 +15,21 @@ module.exports = (app) ->
     userLogin.findOne $or: [{email: login}, {nick: login}]
       .exec()
       .then (user) ->
-        r = {}
 
-        if user != null and !req.session._id
+        if user != null and !req.session.data
           bcrypt.compare pass, user.pass, (rq, rs) ->
             if rs
-              r.status = 'success'
-              r.data = user
+              r = request.req 'success', 'login success', user
 
               req.session.data = r.data
 
               res.status(200).json r
             else
-              r.status = 'error'
-              r.data = 'pass error'
+              r = request.req 'error', 'pass error'
 
               res.status(500).json r
         else
-          r.status = 'error'
-          r.data = 'login error'
+          r = request.req 'error', 'login error'
 
           res.status(500).json r
       , (error) ->
@@ -43,24 +40,34 @@ module.exports = (app) ->
   controller.register = (req, res) ->
     user = req.body.user
 
-    bcrypt.genSalt 10, (err, salt) ->
-      bcrypt.hash user.pass, salt, (err, hash) ->
-        user.pass = hash
-        userLogin.create user
-          .then (user) ->
-            r.status = 'success'
-            r.data = user
+    if req.headers['content-type'] == 'application/json'
+      if user != null and !req.session.data
+        bcrypt.genSalt 10, (err, salt) ->
+          bcrypt.hash user.pass, salt, (err, hash) ->
+            user.pass = hash
+            userLogin.create user
+              .then (user) ->
+                r = request.req 'success', 'register success', user
 
-            req.session.data = r.data
+                req.session.data = r.data
 
-            res.status(201).json r
-          , (error) ->
-            console.error error
-            res.status(500).json error
+                res.status(201).json r
+              , (error) ->
+                r = request.req 'error', 'register error', error
+
+                res.status(500).json r
+      else
+        r = request.req 'error', 'register error'
+
+        res.status(500).json r
+    else
+      r = request.req 'error', 'header error'
+
+      res.status(500).json r
 
   # Logout
   controller.logout = (req, res) ->
-    if req.session._id
+    if req.session.data
       req.session.destroy ->
         res.redirect '/'
     else
