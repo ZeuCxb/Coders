@@ -5,7 +5,7 @@ angular.module('coders').controller('titleCtrl', [
     self.title = 'CSC - A Social Community to learn, teach and grow up.';
     $scope.$on('connected', function(envent, args) {
       if (args) {
-        return self.title = 'CSC - ' + args.nick;
+        return self.title = 'CSC - ' + args.nick + ' (' + args.name + ')';
       }
     });
   }
