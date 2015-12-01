@@ -1,0 +1,27 @@
+<div id="loginModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="loginModal">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Log In</h4>
+      </div>
+
+      <form name="logIn" novalidate>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="login">Login:</label>
+            <input type="text" class="form-control" placeholder="nickname/email:" id="login" ng-class="{'error': ctrl.error.login}" ng-model="ctrl.loginUser.login" required>
+          </div>
+
+          <div class="form-group">
+            <label for="pass">Password:</label>
+            <input type="password" class="form-control" placeholder="password:" id="pass" ng-class="{'error': ctrl.error.pass}" ng-model="ctrl.loginUser.pass" required>
+          </div>
+      </form>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-purple" ng-click="ctrl.logIn()" ng-disabled="logIn.$invalid">Log In</button>
+      </div>
+    </div>
+  </div>
+</div>
