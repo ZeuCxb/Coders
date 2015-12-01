@@ -1,6 +1,60 @@
 angular.module('coders').controller('appCtrl', [
-  function() {
-    var self;
+  'codersApi', '$location', '$window', function(codersApi, $location, $window) {
+    var connect, self;
     self = this;
+    connect = function() {
+      return codersApi.connect().then(function(data) {
+        self.user = data.data;
+        return console.log(self.user);
+      }, function() {
+        return self.user = {};
+      });
+    };
+    self.logOn = function() {
+      var user;
+      if (self.logonUser) {
+        user = self.logonUser;
+        delete user.cpass;
+        user.email = user.email.toLowerCase();
+        user.name = user.name.toLowerCase();
+        user.nick = user.nick.toLowerCase();
+        return codersApi.logon(user).then(function(data) {
+          return $window.location.reload();
+        }, function(error) {
+          var email, nick;
+          if (error.status === 'error') {
+            if (error.data) {
+              email = error.data.errmsg.search('email');
+              nick = error.data.errmsg.search('nick');
+              self.error = {};
+              if (email > 0) {
+                self.error.email = true;
+              }
+              if (nick > 0) {
+                return self.error.nick = true;
+              }
+            } else {
+              return $window.location.reload();
+            }
+          }
+        });
+      }
+    };
+    self.logIn = function() {
+      var user;
+      if (self.loginUser) {
+        user = self.loginUser;
+        user.login = user.login.toLowerCase();
+        return codersApi.login(user).then(function(data) {
+          return $window.location.reload();
+        }, function(error) {
+          self.error = {};
+          console.log(error);
+          self.error.login = true;
+          return self.error.pass = true;
+        });
+      }
+    };
+    connect();
   }
 ]);
