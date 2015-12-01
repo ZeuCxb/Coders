@@ -3,8 +3,12 @@
 // Body
 body
 	background-color: $purple
-	color: $white
+	color: $purple
 	font-family: Tahoma, Arial, sans-serif
+
+// a, button
+a, button
+	cursor: pointer
 
 // Nav
 nav
@@ -51,10 +55,26 @@ nav
 			&:hover
 	    	transform: scale(1.1)
 
+// btn-purple
+.btn-purple
+	background-color: $purple
+	color: $white
+
+	&:hover
+		background-color: $lpurple
+		color: $white
 
 // Section
 section
 	margin-top: 50px
+
+// error
+.error
+	color: $red
+
+input.error
+	background-color: $red
+	color: $white
 
 // Page
 .page
