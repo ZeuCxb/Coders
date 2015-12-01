@@ -25,45 +25,39 @@ module.exports = (app) ->
 
               res.status(200).json r
             else
-              r = request.req 'error', 'pass error'
-
-              res.status(500).json r
+              request.json 'error', 'pass error', '', res, 500
         else
-          r = request.req 'error', 'login error'
-
-          res.status(500).json r
+          request.json 'error', 'login error', '', res, 500
       , (error) ->
         console.error error
         res.status(500).json error
+
+  # Connect
+  controller.connect = (req, res) ->
+    if req.session.data
+      request.json 'success', 'connect success', req.session.data, res, 202, ['name', 'email', 'nick']
+    else
+      request.json 'error', 'connect error', '', res, 204
 
   # Register
   controller.register = (req, res) ->
     user = req.body.user
 
-    if req.headers['content-type'] == 'application/json'
-      if user != null and !req.session.data
-        bcrypt.genSalt 10, (err, salt) ->
-          bcrypt.hash user.pass, salt, (err, hash) ->
-            user.pass = hash
-            userLogin.create user
-              .then (user) ->
-                r = request.req 'success', 'register success', user
+    if user != null and !req.session.data
+      bcrypt.genSalt 10, (err, salt) ->
+        bcrypt.hash user.pass, salt, (err, hash) ->
+          user.pass = hash
+          userLogin.create user
+            .then (user) ->
+              r = request.req 'success', 'register success', user
 
-                req.session.data = r.data
+              req.session.data = r.data
 
-                res.status(201).json r
-              , (error) ->
-                r = request.req 'error', 'register error', error
-
-                res.status(500).json r
-      else
-        r = request.req 'error', 'register error'
-
-        res.status(500).json r
+              res.status(201).json r
+            , (error) ->
+              request.json 'error', 'register error', error, res, 500
     else
-      r = request.req 'error', 'header error'
-
-      res.status(500).json r
+      request.json 'error', 'register error', '', res, 500
 
   # Logout
   controller.logout = (req, res) ->
