@@ -17,8 +17,9 @@
         <li><a ng-href="#/teste">Page 2</a></li>
       </ul>
       <ul class="nav navbar-nav pull-right">
-        <li><a data-toggle="modal" data-target="#registerModal">Log On</a></li>
-        <li><a data-toggle="modal" data-target="#loginModal" class="active">Log In</a></li>
+        <li ng-if="!ctrl.user"><a data-toggle="modal" data-target="#registerModal">Log On</a></li>
+        <li ng-if="!ctrl.user"><a data-toggle="modal" data-target="#loginModal" class="active">Log In</a></li>
+        <li ng-if="ctrl.user"><a ng-click="ctrl.logOut()" class="active">Log Out</a></li>
       </ul>
     </div>
   </div>

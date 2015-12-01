@@ -6,7 +6,6 @@ angular.module 'coders'
       codersApi.connect()
         .then (data) ->
           self.user = data.data
-          console.log self.user
         , () ->
           self.user = {}
 
@@ -53,6 +52,12 @@ angular.module 'coders'
 
             self.error.login = true
             self.error.pass = true
+
+    self.logOut = ->
+      if self.user
+        codersApi.logout()
+          .then ->
+            $window.location.reload()
 
     connect()
 

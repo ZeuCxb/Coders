@@ -26,7 +26,7 @@
 
 			<div ng-include="'./includes/footer.html'"></div>
 		</section>
-		<div ng-include="'./includes/logon.html'"></div>
-		<div ng-include="'./includes/login.html'"></div>
+		<div ng-include="'./includes/logon.html'" ng-if="!ctrl.user"></div>
+		<div ng-include="'./includes/login.html'" ng-if="!ctrl.user"></div>
 	</body>
 </html>

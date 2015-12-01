@@ -4,8 +4,7 @@ angular.module('coders').controller('appCtrl', [
     self = this;
     connect = function() {
       return codersApi.connect().then(function(data) {
-        self.user = data.data;
-        return console.log(self.user);
+        return self.user = data.data;
       }, function() {
         return self.user = {};
       });
@@ -52,6 +51,13 @@ angular.module('coders').controller('appCtrl', [
           console.log(error);
           self.error.login = true;
           return self.error.pass = true;
+        });
+      }
+    };
+    self.logOut = function() {
+      if (self.user) {
+        return codersApi.logout().then(function() {
+          return $window.location.reload();
         });
       }
     };
