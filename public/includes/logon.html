@@ -1,0 +1,45 @@
+<div id="registerModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="registerModal">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Log On</h4>
+      </div>
+
+      <form name="logOn" novalidate>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" placeholder="name:" id="name" ng-model="ctrl.logonUser.name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="nick">Nickname:</label>
+            <input type="text" class="form-control" placeholder="nickname:" id="nick" ng-class="{'error': ctrl.error.nick}" ng-model="ctrl.logonUser.nick" required>
+          </div>
+
+          <hr>
+
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" placeholder="email:" id="email" ng-class="{'error': ctrl.error.email}" ng-model="ctrl.logonUser.email" required>
+          </div>
+
+          <div class="form-group">
+            <label for="pass">Password:</label>
+            <input type="password" class="form-control" placeholder="password:" id="pass" ng-model="ctrl.logonUser.pass" required>
+          </div>
+
+          <div class="form-group">
+            <label for="cpass">Confirm Password:</label>
+            <input type="password" class="form-control" placeholder="confirm password:" id="cpass" ng-model="ctrl.logonUser.cpass" required>
+          </div>
+        </div>
+      </form>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-purple" ng-click="ctrl.logOn()" ng-disabled="logOn.$invalid || ctrl.logonUser.pass != ctrl.logonUser.cpass">Log On</button>
+      </div>
+    </div>
+  </div>
+</div>
