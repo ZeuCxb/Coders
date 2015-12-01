@@ -1,11 +1,12 @@
 angular.module 'coders'
-  .controller 'appCtrl', ['codersApi', '$location', '$window', (codersApi, $location, $window) ->
+  .controller 'appCtrl', ['codersApi', '$location', '$window', '$scope', (codersApi, $location, $window, $scope) ->
     self = @
 
     connect = ->
       codersApi.connect()
         .then (data) ->
           self.user = data.data
+          $scope.$emit 'connect', self.user
         , () ->
           self.user = {}
 
