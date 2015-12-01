@@ -1,7 +1,10 @@
 body {
   background-color: #303;
-  color: #FFF;
+  color: #303;
   font-family: Tahoma, Arial, sans-serif; }
+
+a, button {
+  cursor: pointer; }
 
 nav {
   border-bottom: 1px solid #f0f0f0; }
@@ -37,8 +40,22 @@ nav .navbar-header a img {
   nav .navbar-header a img:hover {
     transform: scale(1.1); }
 
+.btn-purple {
+  background-color: #303;
+  color: #FFF; }
+  .btn-purple:hover {
+    background-color: #404;
+    color: #FFF; }
+
 section {
   margin-top: 50px; }
+
+.error {
+  color: #C0394D; }
+
+input.error {
+  background-color: #C0394D;
+  color: #FFF; }
 
 .page {
   background-color: #FFF;
