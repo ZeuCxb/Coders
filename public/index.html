@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="coders">
+	<head ng-controller="titleCtrl as ctrl">
+		<title ng-bind="ctrl.title">Coders</title>
+
+		<meta charset="utf-8">
+
+		<!-- Vendors -->
+		<script src="./vendors/jquery/dist/jquery.min.js"></script>
+		<script src="./vendors/angular/angular.min.js"></script>
+		<script src="./vendors/angular-route/angular-route.min.js"></script>
+		<script src="./vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="./vendors/bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="./vendors/bootstrap/dist/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" type="text/css" href="./vendors/font-awesome/css/font-awesome.min.css">
+
+		<!-- App -->
+		<script src="./dist/js/dist.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="./dist/css/dist.min.css">
+
+	</head>
+	<body ng-controller="appCtrl as ctrl">
+		<div ng-include="'./includes/nav.html'"></div>
+		<section>
+			<div ng-view class="page"></div>
+
+			<div ng-include="'./includes/footer.html'"></div>
+		</section>
+		<div ng-include="'./includes/logon.html'"></div>
+		<div ng-include="'./includes/login.html'"></div>
+	</body>
+</html>
