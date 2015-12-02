@@ -5,15 +5,15 @@ bcrypt = require('bcrypt');
 request = require('request-coders-api');
 
 module.exports = function(app) {
-  var controller, userLogin;
-  userLogin = app.models.userLogin;
+  var controller, userSchema;
+  userSchema = app.models.user;
   controller = {};
   controller.login = function(req, res) {
     var login, pass, user;
     user = req.body.user;
     login = user.login;
     pass = user.pass;
-    return userLogin.findOne({
+    return userSchema.findOne({
       $or: [
         {
           email: login
@@ -43,7 +43,7 @@ module.exports = function(app) {
   };
   controller.connect = function(req, res) {
     if (req.session.data) {
-      return request.json('success', 'connect success', req.session.data, res, 202, ['name', 'email', 'nick']);
+      return request.json('success', 'connect success', req.session.data, res, 202);
     } else {
       return request.json('error', 'connect error', '', res, 204);
     }
@@ -55,7 +55,7 @@ module.exports = function(app) {
       return bcrypt.genSalt(10, function(err, salt) {
         return bcrypt.hash(user.pass, salt, function(err, hash) {
           user.pass = hash;
-          return userLogin.create(user).then(function(user) {
+          return userSchema.create(user).then(function(user) {
             var r;
             r = request.req('success', 'register success', user);
             req.session.data = r.data;

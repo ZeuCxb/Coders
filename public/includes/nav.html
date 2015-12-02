@@ -12,9 +12,13 @@
       </button>
     </div>
     <div class="collapse navbar-collapse" id="nav-top" aria-expanded="false">
-      <ul class="nav navbar-nav">
+      <!-- Default nav -->
+      <ul ng-if="!ctrl.user" class="nav navbar-nav">
         <li><a ng-href="#/">Home</a></li>
-        <li><a ng-href="#/teste">Page 2</a></li>
+      </ul>
+      <!-- User nav -->
+      <ul ng-if="ctrl.user" class="nav navbar-nav">
+        <li><a ng-href="#/page/{{ctrl.user._id}}">{{ctrl.user.nick}}</a></li>
       </ul>
       <ul class="nav navbar-nav pull-right">
         <li ng-if="!ctrl.user"><a data-toggle="modal" data-target="#registerModal">Log On</a></li>

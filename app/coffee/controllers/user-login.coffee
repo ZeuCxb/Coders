@@ -2,7 +2,7 @@ bcrypt = require 'bcrypt'
 request = require 'request-coders-api'
 
 module.exports = (app) ->
-  userLogin = app.models.userLogin
+  userSchema = app.models.user
 
   controller = {}
 
@@ -12,7 +12,7 @@ module.exports = (app) ->
     login = user.login
     pass = user.pass
 
-    userLogin.findOne $or: [{email: login}, {nick: login}]
+    userSchema.findOne $or: [{email: login}, {nick: login}]
       .exec()
       .then (user) ->
 
@@ -35,7 +35,7 @@ module.exports = (app) ->
   # Connect
   controller.connect = (req, res) ->
     if req.session.data
-      request.json 'success', 'connect success', req.session.data, res, 202, ['name', 'email', 'nick']
+      request.json 'success', 'connect success', req.session.data, res, 202
     else
       request.json 'error', 'connect error', '', res, 204
 
@@ -47,7 +47,7 @@ module.exports = (app) ->
       bcrypt.genSalt 10, (err, salt) ->
         bcrypt.hash user.pass, salt, (err, hash) ->
           user.pass = hash
-          userLogin.create user
+          userSchema.create user
             .then (user) ->
               r = request.req 'success', 'register success', user
 
@@ -67,4 +67,4 @@ module.exports = (app) ->
     else
       res.redirect '/'
 
-  return controller
+  controller

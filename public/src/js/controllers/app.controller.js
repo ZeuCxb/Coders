@@ -1,10 +1,11 @@
 angular.module('coders').controller('appCtrl', [
-  'codersApi', '$location', '$window', '$scope', function(codersApi, $location, $window, $scope) {
+  'codersApi', 'codersAppUser', '$location', '$window', '$scope', function(codersApi, codersAppUser, $location, $window, $scope) {
     var connect, self;
     self = this;
     connect = function() {
       return codersApi.connect().then(function(data) {
         self.user = data.data;
+        codersAppUser.setAppUser(self.user);
         return $scope.$emit('connect', self.user);
       }, function() {
         return self.user = {};

@@ -3,8 +3,8 @@ angular.module 'coders'
     '$routeProvider', ($routeProvider) ->
       $routeProvider.when '/',
         templateUrl: 'views/home.html'
-      $routeProvider.when '/teste',
-        templateUrl: 'views/teste.html'
+      $routeProvider.when '/page/:_id',
+        templateUrl: 'views/page.html'
       .otherwise
         redirectTo: '/'
 

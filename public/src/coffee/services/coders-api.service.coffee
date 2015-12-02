@@ -6,6 +6,7 @@ angular.module 'coders'
       urlLogOn = url + 'register'
       urlLogIn = url + 'login'
       urlLogOut = url + 'logout'
+      urlUser = url + 'user'
 
       connect = ->
         deferred = $q.defer()
@@ -50,8 +51,18 @@ angular.module 'coders'
 
         deferred.promise
 
+      getUser = (_id) ->
+        deferred = $q.defer()
+
+        $http.get urlUser + '/' + _id
+          .success deferred.resolve
+          .error deferred.reject
+
+        deferred.promise
+
       logon: logon
       login: login
       connect: connect
       logout: logout
+      getUser: getUser
   ]

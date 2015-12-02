@@ -1,0 +1,9 @@
+<div class="container" ng-controller="pageCtrl as ctrl">
+	<div class="jumbotron row">
+		<div class="col-xs-12">
+			<h1>{{ctrl.page.user.nick}}</h1>
+			<p ng-if="ctrl.page.my">Your page!</p>
+			<p ng-if="!ctrl.page.my">Not your page!</p>
+		</div>
+	</div>
+</div>

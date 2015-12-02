@@ -19,4 +19,4 @@ module.exports = ->
       index:
         unique: true
 
-  return mongoose.model 'userLogin', schema
+  return mongoose.model 'user', schema
