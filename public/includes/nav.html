@@ -15,10 +15,13 @@
       <!-- Default nav -->
       <ul ng-if="!ctrl.user" class="nav navbar-nav col-sm-3">
         <li><a ng-href="#/">Home</a></li>
+        <li ng-if="!ctrl.user"><a data-toggle="modal" data-target="#registerModal" class="visible-xs">Log On</a></li>
+        <li ng-if="!ctrl.user"><a data-toggle="modal" data-target="#loginModal" class="active visible-xs">Log In</a></li>
       </ul>
       <!-- User nav -->
       <ul ng-if="ctrl.user" class="nav navbar-nav col-sm-3">
         <li><a ng-href="#/page/{{ctrl.user._id}}">{{ctrl.user.nick}}</a></li>
+        <li ng-if="ctrl.user"><a ng-click="ctrl.logOut()" class="active visible-xs">Log Out</a></li>
       </ul>
       <!-- Search -->
       <ul class="nav navbar-nav col-sm-5 search">
@@ -32,7 +35,7 @@
         </li>
       </ul>
       <!-- Right nav -->
-      <ul class="nav navbar-nav pull-right">
+      <ul class="nav navbar-nav pull-right hidden-xs">
         <li ng-if="!ctrl.user"><a data-toggle="modal" data-target="#registerModal">Log On</a></li>
         <li ng-if="!ctrl.user"><a data-toggle="modal" data-target="#loginModal" class="active">Log In</a></li>
         <li ng-if="ctrl.user"><a ng-click="ctrl.logOut()" class="active">Log Out</a></li>

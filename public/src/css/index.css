@@ -27,6 +27,9 @@ nav {
     nav .navbar-header button.collapsed span.icon-bar {
       background-color: #303; }
 
+.navbar-nav {
+  margin-left: 0; }
+
 .search {
   padding-top: 8px; }
 
