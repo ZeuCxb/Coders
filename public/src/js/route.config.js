@@ -5,6 +5,9 @@ angular.module('coders').config([
     });
     $routeProvider.when('/page/:_id', {
       templateUrl: 'views/page.html'
+    });
+    $routeProvider.when('/search/:search', {
+      templateUrl: 'views/search.html'
     }).otherwise({
       redirectTo: '/'
     });

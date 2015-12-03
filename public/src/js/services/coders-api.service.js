@@ -1,11 +1,12 @@
 angular.module('coders').factory('codersApi', [
   '$q', '$http', function($q, $http) {
-    var connect, format, getUser, login, logon, logout, url, urlLogIn, urlLogOn, urlLogOut, urlUser;
+    var connect, findUsers, format, getUser, login, logon, logout, url, urlLogIn, urlLogOn, urlLogOut, urlUser, urlUsers;
     url = 'http://localhost:5000/';
     urlLogOn = url + 'register';
     urlLogIn = url + 'login';
     urlLogOut = url + 'logout';
     urlUser = url + 'user';
+    urlUsers = url + 'users';
     connect = function() {
       var deferred;
       deferred = $q.defer();
@@ -41,12 +42,19 @@ angular.module('coders').factory('codersApi', [
       $http.get(urlUser + '/' + _id).success(deferred.resolve).error(deferred.reject);
       return deferred.promise;
     };
+    findUsers = function(search) {
+      var deferred;
+      deferred = $q.defer();
+      $http.get(urlUsers + '/' + search).success(deferred.resolve).error(deferred.resolve);
+      return deferred.promise;
+    };
     return {
       logon: logon,
       login: login,
       connect: connect,
       logout: logout,
-      getUser: getUser
+      getUser: getUser,
+      findUsers: findUsers
     };
   }
 ]);

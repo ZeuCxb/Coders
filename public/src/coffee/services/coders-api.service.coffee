@@ -7,6 +7,7 @@ angular.module 'coders'
       urlLogIn = url + 'login'
       urlLogOut = url + 'logout'
       urlUser = url + 'user'
+      urlUsers = url + 'users'
 
       connect = ->
         deferred = $q.defer()
@@ -60,9 +61,19 @@ angular.module 'coders'
 
         deferred.promise
 
+      findUsers = (search) ->
+        deferred = $q.defer()
+
+        $http.get urlUsers + '/' + search
+          .success deferred.resolve
+          .error deferred.resolve
+
+        deferred.promise
+
       logon: logon
       login: login
       connect: connect
       logout: logout
       getUser: getUser
+      findUsers: findUsers
   ]

@@ -1,0 +1,9 @@
+<div class="container" ng-controller="searchCtrl as ctrl">
+  <span ng-if="!ctrl.foundUsers" class="col-xs-12 text-center">USER NOT FOUND!</span>
+
+  <a ng-repeat="user in ctrl.foundUsers" class="col-xs-4 users-result" ng-if="ctrl.foundUsers && ctrl.user._id != user._id" ng-href="#/page/{{user._id}}">
+    <span class="text-center col-xs-12"><i class="fa fa-user fa-3x"></i></span>
+    <span class="text-center col-xs-12">{{user.nick}}</span>
+    <span class="text-center col-xs-12">({{user.name}})</span>
+  </a>
+</div>

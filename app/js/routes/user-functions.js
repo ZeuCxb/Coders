@@ -1,5 +1,6 @@
 module.exports = function(app) {
   var controller;
   controller = app.controllers.userFunctions;
-  return app.route('/user/:_id').get(controller.user);
+  app.route('/user/:_id').get(controller.user);
+  return app.route('/users/:search').get(controller.findUsers);
 };

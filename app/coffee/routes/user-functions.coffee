@@ -3,3 +3,6 @@ module.exports = (app) ->
 
   app.route '/user/:_id'
     .get controller.user
+
+  app.route '/users/:search'
+    .get controller.findUsers

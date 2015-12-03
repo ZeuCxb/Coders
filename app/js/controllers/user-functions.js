@@ -19,5 +19,30 @@ module.exports = function(app) {
       return request.json('error', 'invalid id', error, res, 400);
     });
   };
+  controller.findUsers = function(req, res) {
+    var search;
+    search = req.params.search;
+    return userSchema.find({
+      $or: [
+        {
+          email: {
+            $regex: search
+          }
+        }, {
+          nick: {
+            $regex: search
+          }
+        }
+      ]
+    }).sort({
+      nick: 1
+    }).exec().then(function(users) {
+      if (users.length > 0) {
+        return request.json('success', 'users found', users, res, 200);
+      } else {
+        return request.json('error', 'users not found', '', res, 404);
+      }
+    });
+  };
   return controller;
 };

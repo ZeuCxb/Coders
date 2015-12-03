@@ -18,4 +18,16 @@ module.exports = (app) ->
       , (error) ->
         request.json 'error', 'invalid id', error, res, 400
 
+  controller.findUsers = (req, res) ->
+    search = req.params.search
+
+    userSchema.find $or: [{email: {$regex: search}}, {nick: {$regex: search}}]
+      .sort nick: 1
+      .exec()
+      .then (users) ->
+        if users.length > 0
+          request.json 'success', 'users found', users, res, 200
+        else
+          request.json 'error', 'users not found', '', res, 404
+
   controller
