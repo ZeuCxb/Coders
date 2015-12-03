@@ -8,7 +8,14 @@ angular.module 'coders'
 
     self.user = codersAppUser.getAppUser()
 
-    getPageUser = ->
+    getPost = ->
+      codersApi.getPost(_id)
+        .then (data) ->
+          self.post = data.data
+        , ->
+          self.post = false
+
+    getPage = ->
       codersApi.getUser(_id)
         .then (data) ->
           self.page.user = data.data
@@ -23,7 +30,24 @@ angular.module 'coders'
         , (error) ->
           self.page.error = error
 
-    getPageUser()
+      getPost()
+
+    self.sendPost = ->
+      message = {}
+
+      message.text = self.msg
+      message.user = self.user._id
+
+      codersApi.post message
+        .then (data) ->
+          getPost()
+          self.msg = ''
+
+    self.delPost = (_id) ->
+      codersApi.delPost _id
+
+
+    getPage()
 
     return
   ]

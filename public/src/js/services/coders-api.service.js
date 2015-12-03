@@ -1,12 +1,13 @@
 angular.module('coders').factory('codersApi', [
-  '$q', '$http', function($q, $http) {
-    var connect, findUsers, format, getUser, login, logon, logout, url, urlLogIn, urlLogOn, urlLogOut, urlUser, urlUsers;
+  '$q', '$http', '$window', function($q, $http, $window) {
+    var connect, delPost, findUsers, format, getPost, getUser, login, logon, logout, post, url, urlLogIn, urlLogOn, urlLogOut, urlPost, urlUser, urlUsers;
     url = 'http://localhost:5000/';
     urlLogOn = url + 'register';
     urlLogIn = url + 'login';
     urlLogOut = url + 'logout';
     urlUser = url + 'user';
     urlUsers = url + 'users';
+    urlPost = url + 'post';
     connect = function() {
       var deferred;
       deferred = $q.defer();
@@ -48,13 +49,32 @@ angular.module('coders').factory('codersApi', [
       $http.get(urlUsers + '/' + search).success(deferred.resolve).error(deferred.resolve);
       return deferred.promise;
     };
+    post = function(message) {
+      var deferred;
+      deferred = $q.defer();
+      message = '{"message": ' + JSON.stringify(message) + '}';
+      $http.post(urlPost, message).success(deferred.resolve).error(deferred.reject);
+      return deferred.promise;
+    };
+    getPost = function(_id) {
+      var deferred;
+      deferred = $q.defer();
+      $http.get(urlPost + '/' + _id).success(deferred.resolve).error(deferred.reject);
+      return deferred.promise;
+    };
+    delPost = function(_id) {
+      return $http["delete"](urlPost + '/' + _id).success($window.location.reload());
+    };
     return {
       logon: logon,
       login: login,
       connect: connect,
       logout: logout,
       getUser: getUser,
-      findUsers: findUsers
+      findUsers: findUsers,
+      post: post,
+      getPost: getPost,
+      delPost: delPost
     };
   }
 ]);

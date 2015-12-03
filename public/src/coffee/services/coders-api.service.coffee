@@ -1,6 +1,6 @@
 angular.module 'coders'
   .factory 'codersApi', [
-  	'$q', '$http', ($q, $http) ->
+  	'$q', '$http', '$window', ($q, $http, $window) ->
 
       url = 'http://localhost:5000/'
       urlLogOn = url + 'register'
@@ -8,6 +8,7 @@ angular.module 'coders'
       urlLogOut = url + 'logout'
       urlUser = url + 'user'
       urlUsers = url + 'users'
+      urlPost = url + 'post'
 
       connect = ->
         deferred = $q.defer()
@@ -70,10 +71,37 @@ angular.module 'coders'
 
         deferred.promise
 
+      post = (message) ->
+        deferred = $q.defer()
+
+        message = '{"message": ' + JSON.stringify(message) + '}'
+
+        $http.post urlPost, message
+        	.success deferred.resolve
+        	.error deferred.reject
+
+        deferred.promise
+
+      getPost = (_id) ->
+        deferred = $q.defer()
+
+        $http.get urlPost + '/' + _id
+        	.success deferred.resolve
+        	.error deferred.reject
+
+        deferred.promise
+
+      delPost = (_id) ->
+        $http.delete urlPost + '/' + _id
+        	.success $window.location.reload()
+
       logon: logon
       login: login
       connect: connect
       logout: logout
       getUser: getUser
       findUsers: findUsers
+      post: post
+      getPost: getPost
+      delPost: delPost
   ]

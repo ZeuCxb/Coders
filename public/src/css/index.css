@@ -57,7 +57,9 @@ section {
   margin-top: 50px; }
 
 .error {
-  color: #C0394D; }
+  color: #C0394D;
+  font-weight: bold;
+  padding: 20px; }
 
 input.error {
   background-color: #C0394D;

@@ -1,0 +1,28 @@
+.page textarea {
+  height: 70px;
+  resize: none;
+  color: #303; }
+
+.page button {
+  height: 70px;
+  width: 70px; }
+
+.page .post {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  color: #303;
+  background-color: rgba(80, 0, 80, 0.3);
+  padding: 20px; }
+  .page .post .delete i {
+    color: #C0394D;
+    font-weight: bold;
+    margin-bottom: 20px;
+    cursor: pointer; }
+    .page .post .delete i:hover {
+      color: #303; }
+  .page .post .text {
+    font-weight: bold;
+    white-space: pre-line; }
+  .page .post .date {
+    margin-top: 40px;
+    font-style: italic; }

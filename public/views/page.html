@@ -1,4 +1,4 @@
-<div class="container" ng-controller="pageCtrl as ctrl">
+<div class="container page" ng-controller="pageCtrl as ctrl">
 	<div class="jumbotron row">
 		<div class="col-xs-12">
 			<h1>{{ctrl.page.user.nick}}</h1>
@@ -6,4 +6,20 @@
 			<p ng-if="!ctrl.page.my">Not your page!</p>
 		</div>
 	</div>
+
+	<div class="input-group" ng-if="ctrl.page.my">
+		<textarea class="form-control" ng-model="ctrl.msg" placeholder="What you want to tell?"></textarea>
+		<span class="input-group-btn">
+			<button class="btn btn-purple" ng-click="ctrl.sendPost()" ng-disabled="!ctrl.msg"><i class="fa fa-comment"></i></button>
+		</span>
+	</div>
+
+	<span ng-if="!ctrl.post" class="col-xs-12 text-center error">NO POST YET!</span>
+
+	<div ng-repeat="post in ctrl.post" class="col-xs-12 post" ng-if="ctrl.post">
+		<span ng-if="ctrl.page.my" class="text-right delete col-xs-12"><i class="fa fa-trash-o fa-lg" ng-click="ctrl.delPost(post._id)"></i></span>
+    <span class="text">"{{post.text}}"</span>
+		<span class="pull-right date">{{post.date | date: 'yyyy/MM/dd'}}</span>
+  </div>
+
 </div>
