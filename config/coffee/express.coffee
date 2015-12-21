@@ -2,7 +2,7 @@ express = require 'express'
 redis = require 'redis'
 session = require 'express-session'
 redisStore = require('connect-redis')(session)
-client = redis.createClient()
+client = redis.createClient(process.env.REDIS_URL)
 load = require 'express-load'
 bodyParser = require 'body-parser'
 
@@ -16,7 +16,7 @@ module.exports = ->
 
 	app.use session (
     secret: 'pepo'
-    store: new redisStore({host: 'ec2-54-243-135-236.compute-1.amazonaws.com', port: 10699, client: client, pass: 'p20qlkqo4pb0qaasmbldkar3t4q', url: 'redis://h:p20qlkqo4pb0qaasmbldkar3t4q@ec2-54-243-135-236.compute-1.amazonaws.com:10699'})
+    store: new redisStore({host: 'ec2-54-243-135-236.compute-1.amazonaws.com', port: 10699, client: client})
     saveUninitialized: false
     resave: false
 		)
