@@ -36,15 +36,6 @@ module.exports = (app) ->
 
   # Connect
   controller.connect = (req, res) ->
-    gdb.cypher
-        query: 'MATCH (user:User) RETURN user'
-    , (err, results) ->
-      if err
-        console.error err
-        return err
-      else
-        for result in results
-          console.log result.user.properties._id
     if req.session.data
       request.json 'success', 'connect success', req.session.data, res, 202
     else

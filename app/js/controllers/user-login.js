@@ -46,22 +46,6 @@ module.exports = function(app) {
     });
   };
   controller.connect = function(req, res) {
-    gdb.cypher({
-      query: 'MATCH (user:User) RETURN user'
-    }, function(err, results) {
-      var i, len, result, results1;
-      if (err) {
-        console.error(err);
-        return err;
-      } else {
-        results1 = [];
-        for (i = 0, len = results.length; i < len; i++) {
-          result = results[i];
-          results1.push(console.log(result.user.properties._id));
-        }
-        return results1;
-      }
-    });
     if (req.session.data) {
       return request.json('success', 'connect success', req.session.data, res, 202);
     } else {
