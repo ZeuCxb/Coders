@@ -17,14 +17,14 @@ bodyParser = require('body-parser');
 module.exports = function() {
   var app;
   app = express();
-  app.set('port', 5000);
+  app.set('port', process.env.PORT || 5000);
   app.set('view engine', 'ejs');
   app.set('views', './app/views');
   app.use(session({
     secret: 'pepo',
     store: new redisStore({
-      host: 'localhost',
-      port: 6379,
+      host: 'ec2-54-243-135-236.compute-1.amazonaws.com',
+      port: 10699,
       client: client
     }),
     saveUninitialized: false,

@@ -4,6 +4,7 @@
   "description": "A Social Community to learn, teach and grow up.",
   "main": "app.js",
   "dependencies": {
+    "bower": "^1.6.5",
     "bcrypt": "^0.8.5",
     "body-parser": "^1.14.1",
     "connect-redis": "^3.0.1",
@@ -13,11 +14,11 @@
     "express-session": "^1.12.1",
     "method-override": "^2.3.5",
     "mongoose": "^4.2.8",
+    "neo4j": "^2.0.0-RC2",
     "redis": "^2.4.2",
     "request-coders-api": "^2.0.0"
   },
   "devDependencies": {
-    "bower": "^1.6.5",
     "gulp": "^3.9.0",
     "gulp-coffee": "^2.3.1",
     "gulp-concat": "^2.6.0",
@@ -32,7 +33,9 @@
     "run-sequence": "^1.1.4"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "bower install"
   },
   "repository": {
     "type": "git",

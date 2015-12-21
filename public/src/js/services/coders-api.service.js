@@ -1,7 +1,7 @@
 angular.module('coders').factory('codersApi', [
   '$q', '$http', '$window', function($q, $http, $window) {
     var connect, delPost, findUsers, format, getPost, getUser, login, logon, logout, post, url, urlLogIn, urlLogOn, urlLogOut, urlPost, urlUser, urlUsers;
-    url = 'http://localhost:5000/';
+    url = 'https://csc-beta.herokuapp.com/';
     urlLogOn = url + 'register';
     urlLogIn = url + 'login';
     urlLogOut = url + 'logout';

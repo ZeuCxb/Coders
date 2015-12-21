@@ -1,5 +1,7 @@
 bcrypt = require 'bcrypt'
 request = require 'request-coders-api'
+neo4j = require 'neo4j'
+gdb = new neo4j.GraphDatabase 'http://app45295032:jEvzAMVFTDxAAUumc63x@app45295032.sb02.stations.graphenedb.com:24789'
 
 module.exports = (app) ->
   userSchema = app.models.user
@@ -34,6 +36,15 @@ module.exports = (app) ->
 
   # Connect
   controller.connect = (req, res) ->
+    gdb.cypher
+        query: 'MATCH (user:User) RETURN user'
+    , (err, results) ->
+      if err
+        console.error err
+        return err
+      else
+        for result in results
+          console.log result.user.properties._id
     if req.session.data
       request.json 'success', 'connect success', req.session.data, res, 202
     else
@@ -49,11 +60,18 @@ module.exports = (app) ->
           user.pass = hash
           userSchema.create user
             .then (user) ->
-              r = request.req 'success', 'register success', user
+              gdb.cypher
+                  query: 'CREATE (user:User {_id: "' + user._id + '"})'
+              , (error, results) ->
+                if error
+                  console.error error
+                  request.json 'error', 'register error', error, res, 500
+                else
+                  r = request.req 'success', 'register success', user
 
-              req.session.data = r.data
+                  req.session.data = r.data
 
-              res.status(201).json r
+                  res.status(201).json r
             , (error) ->
               request.json 'error', 'register error', error, res, 500
     else
