@@ -25,8 +25,12 @@ module.exports = function() {
     store: new redisStore({
       host: 'ec2-54-243-135-236.compute-1.amazonaws.com',
       port: 10699,
-      client: client
-    })
+      client: client,
+      pass: 'p20qlkqo4pb0qaasmbldkar3t4q',
+      url: 'redis://h:p20qlkqo4pb0qaasmbldkar3t4q@ec2-54-243-135-236.compute-1.amazonaws.com:10699'
+    }),
+    saveUninitialized: false,
+    resave: false
   }));
   app.use(function(req, res, next) {
     if (!req.session) {
