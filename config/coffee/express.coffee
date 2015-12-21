@@ -16,10 +16,13 @@ module.exports = ->
 
 	app.use session (
     secret: 'pepo'
-    store: new redisStore({ host: 'ec2-54-243-135-236.compute-1.amazonaws.com', port: 10699, client: client})
-    saveUninitialized: false
-    resave: false
+    store: new redisStore({host: 'ec2-54-243-135-236.compute-1.amazonaws.com', port: 10699, client: client})
 		)
+
+	app.use (req, res, next) ->
+    if !req.session
+      return next new Error 'oh no'
+    next()
 
 	app.use express.static './public'
 	app.use bodyParser.urlencoded extended: true

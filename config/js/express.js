@@ -26,10 +26,14 @@ module.exports = function() {
       host: 'ec2-54-243-135-236.compute-1.amazonaws.com',
       port: 10699,
       client: client
-    }),
-    saveUninitialized: false,
-    resave: false
+    })
   }));
+  app.use(function(req, res, next) {
+    if (!req.session) {
+      return next(new Error('oh no'));
+    }
+    return next();
+  });
   app.use(express["static"]('./public'));
   app.use(bodyParser.urlencoded({
     extended: true
