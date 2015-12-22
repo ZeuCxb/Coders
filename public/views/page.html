@@ -3,7 +3,14 @@
 		<div class="col-xs-12">
 			<h1>{{ctrl.page.user.nick}}</h1>
 			<p ng-if="ctrl.page.my">Your page!</p>
-			<p ng-if="!ctrl.page.my">Not your page!</p>
+			<div ng-if="!ctrl.page.my" class="pull-right">
+				<span ng-if="ctrl.page.user.online" class="text-green">
+					(Online)
+				</span>
+				<span ng-if="!ctrl.page.user.online" class="text-red">
+					(Offline)
+				</span>
+			</div>
 		</div>
 	</div>
 
