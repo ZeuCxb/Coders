@@ -20,6 +20,18 @@ module.exports = function() {
       type: String,
       required: true
     },
+    date: {
+      type: Date,
+      "default": Date.now
+    },
+    status: {
+      type: Boolean,
+      "default": 1
+    },
+    online: {
+      type: Boolean,
+      "default": 1
+    },
     nick: {
       type: String,
       required: true,
