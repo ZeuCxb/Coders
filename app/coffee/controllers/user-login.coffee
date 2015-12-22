@@ -52,7 +52,7 @@ module.exports = (app) ->
           userSchema.create user
             .then (user) ->
               gdb.cypher
-                  query: 'CREATE (user:User {_id: "' + user._id + '"})'
+                query: 'CREATE (user:User {_id: "' + user._id + '"})'
               , (error, results) ->
                 if error
                   console.error error

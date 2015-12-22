@@ -1,6 +1,10 @@
-var request;
+var gdb, neo4j, request;
 
 request = require('request-coders-api');
+
+neo4j = require('neo4j');
+
+gdb = new neo4j.GraphDatabase('http://app45295032:jEvzAMVFTDxAAUumc63x@app45295032.sb02.stations.graphenedb.com:24789');
 
 module.exports = function(app) {
   var controller, postSchema, userSchema;
@@ -49,8 +53,17 @@ module.exports = function(app) {
     var message;
     message = req.body.message;
     if (message !== null) {
-      return postSchema.create(message).then(function(user) {
-        return request.json('success', 'post success', message, res, 201);
+      return postSchema.create(message).then(function(msg) {
+        return gdb.cypher({
+          query: 'MATCH (user:User) WHERE user._id = "' + msg.user + '" CREATE (post:Post {_id: "' + msg._id + '"}) CREATE (user)-[r:POST]->(post)'
+        }, function(error, results) {
+          if (error) {
+            console.error(error);
+            return request.json('error', 'post error', error, res, 500);
+          } else {
+            return request.json('success', 'post success', msg, res, 201);
+          }
+        });
       }, function(error) {
         return request.json('error', 'post error', error, res, 500);
       });
@@ -81,8 +94,17 @@ module.exports = function(app) {
       _id: _id
     }, {
       status: false
-    }).exec().then(function(data) {
-      return request.json('success', 'post deleted', users, res, 200);
+    }).exec().then(function(msg) {
+      return gdb.cypher({
+        query: 'MATCH (post:Post), (user)-[r]-(post) WHERE post._id = "' + msg._id + '" DELETE post, r'
+      }, function(error, results) {
+        if (error) {
+          console.error(error);
+          return request.json('error', 'post not deleted', error, res, 500);
+        } else {
+          return request.json('success', 'post deleted', msg, res, 200);
+        }
+      });
     });
   };
   return controller;

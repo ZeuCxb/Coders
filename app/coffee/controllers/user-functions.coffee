@@ -1,4 +1,6 @@
 request = require 'request-coders-api'
+neo4j = require 'neo4j'
+gdb = new neo4j.GraphDatabase 'http://app45295032:jEvzAMVFTDxAAUumc63x@app45295032.sb02.stations.graphenedb.com:24789'
 
 module.exports = (app) ->
   userSchema = app.models.user
@@ -36,8 +38,15 @@ module.exports = (app) ->
 
     if message != null
       postSchema.create message
-        .then (user) ->
-          request.json 'success', 'post success', message, res, 201
+        .then (msg) ->
+          gdb.cypher
+            query: 'MATCH (user:User) WHERE user._id = "' + msg.user + '" CREATE (post:Post {_id: "' + msg._id + '"}) CREATE (user)-[r:POST]->(post)'
+          , (error, results) ->
+            if error
+              console.error error
+              request.json 'error', 'post error', error, res, 500
+            else
+              request.json 'success', 'post success', msg, res, 201
         , (error) ->
           request.json 'error', 'post error', error, res, 500
     else
@@ -60,7 +69,14 @@ module.exports = (app) ->
 
     postSchema.findByIdAndUpdate {_id: _id}, {status: false}
       .exec()
-      .then (data) ->
-          request.json 'success', 'post deleted', users, res, 200
+      .then (msg) ->
+        gdb.cypher
+          query: 'MATCH (post:Post), (user)-[r]-(post) WHERE post._id = "' + msg._id + '" DELETE post, r'
+        , (error, results) ->
+          if error
+            console.error error
+            request.json 'error', 'post not deleted', error, res, 500
+          else
+            request.json 'success', 'post deleted', msg, res, 200
 
   controller
