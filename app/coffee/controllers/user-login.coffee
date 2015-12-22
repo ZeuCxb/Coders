@@ -17,10 +17,12 @@ module.exports = (app) ->
     userSchema.findOne $or: [{email: login}, {nick: login}]
       .exec()
       .then (user) ->
-
         if user != null and !req.session.data
           bcrypt.compare pass, user.pass, (rq, rs) ->
             if rs
+              user.online = true
+              user.save()
+
               r = request.req 'success', 'login success', user
 
               req.session.data = r.data
@@ -71,8 +73,15 @@ module.exports = (app) ->
   # Logout
   controller.logout = (req, res) ->
     if req.session.data
-      req.session.destroy ->
-        res.redirect '/'
+      userSchema.findById req.session.data._id, (err, user) ->
+        if user
+          user.online = false
+          user.save()
+
+          req.session.destroy ->
+            res.redirect '/'
+        else
+          res.redirect '/'
     else
       res.redirect '/'
 

@@ -30,6 +30,8 @@ module.exports = function(app) {
         return bcrypt.compare(pass, user.pass, function(rq, rs) {
           var r;
           if (rs) {
+            user.online = true;
+            user.save();
             r = request.req('success', 'login success', user);
             req.session.data = r.data;
             return res.status(200).json(r);
@@ -84,8 +86,16 @@ module.exports = function(app) {
   };
   controller.logout = function(req, res) {
     if (req.session.data) {
-      return req.session.destroy(function() {
-        return res.redirect('/');
+      return userSchema.findById(req.session.data._id, function(err, user) {
+        if (user) {
+          user.online = false;
+          user.save();
+          return req.session.destroy(function() {
+            return res.redirect('/');
+          });
+        } else {
+          return res.redirect('/');
+        }
       });
     } else {
       return res.redirect('/');
