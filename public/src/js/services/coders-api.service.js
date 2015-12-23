@@ -1,7 +1,7 @@
 angular.module('coders').factory('codersApi', [
-  '$q', '$http', '$window', function($q, $http, $window) {
+  '$q', '$http', '$window', 'CONFIG', function($q, $http, $window, CONFIG) {
     var connect, delPost, findUsers, format, getPost, getUser, login, logon, logout, post, url, urlLogIn, urlLogOn, urlLogOut, urlPost, urlUser, urlUsers;
-    url = 'https://csc-beta.herokuapp.com/';
+    url = CONFIG.url;
     urlLogOn = url + 'register';
     urlLogIn = url + 'login';
     urlLogOut = url + 'logout';
@@ -63,7 +63,9 @@ angular.module('coders').factory('codersApi', [
       return deferred.promise;
     };
     delPost = function(_id) {
-      return $http["delete"](urlPost + '/' + _id).success($window.location.reload());
+      var deferred;
+      deferred = $q.defer();
+      return $http["delete"](urlPost + '/' + _id).success(deferred.resolve).error(deferred.reject);
     };
     return {
       logon: logon,

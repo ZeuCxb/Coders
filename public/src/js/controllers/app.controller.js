@@ -6,7 +6,7 @@ angular.module('coders').controller('appCtrl', [
       return codersApi.connect().then(function(data) {
         self.user = data.data;
         codersAppUser.setAppUser(self.user);
-        return $scope.$emit('connect', self.user);
+        return $scope.$emit('connect', '');
       }, function() {
         return self.user = {};
       });

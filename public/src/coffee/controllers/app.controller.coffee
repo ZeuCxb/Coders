@@ -7,7 +7,7 @@ angular.module 'coders'
         .then (data) ->
           self.user = data.data
           codersAppUser.setAppUser self.user
-          $scope.$emit 'connect', self.user
+          $scope.$emit 'connect', ''
         , () ->
           self.user = {}
 

@@ -40,7 +40,9 @@ angular.module('coders').controller('pageCtrl', [
       });
     };
     self.delPost = function(_id) {
-      return codersApi.delPost(_id);
+      return codersApi.delPost(_id).then(function(data) {
+        return getPost();
+      });
     };
     getPage();
   }

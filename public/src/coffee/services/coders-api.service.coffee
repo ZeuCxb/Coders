@@ -1,8 +1,8 @@
 angular.module 'coders'
   .factory 'codersApi', [
-  	'$q', '$http', '$window', ($q, $http, $window) ->
-
-      url = 'https://csc-beta.herokuapp.com/'
+  	'$q', '$http', '$window', 'CONFIG', ($q, $http, $window, CONFIG) ->
+      
+      url = CONFIG.url
       urlLogOn = url + 'register'
       urlLogIn = url + 'login'
       urlLogOut = url + 'logout'
@@ -92,8 +92,11 @@ angular.module 'coders'
         deferred.promise
 
       delPost = (_id) ->
+        deferred = $q.defer()
+
         $http.delete urlPost + '/' + _id
-        	.success $window.location.reload()
+        	.success deferred.resolve
+        	.error deferred.reject
 
       logon: logon
       login: login

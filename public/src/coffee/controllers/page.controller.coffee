@@ -45,6 +45,8 @@ angular.module 'coders'
 
     self.delPost = (_id) ->
       codersApi.delPost _id
+        .then (data) ->
+          getPost()
 
 
     getPage()
