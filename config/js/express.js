@@ -8,7 +8,7 @@ session = require('express-session');
 
 redisStore = require('connect-redis')(session);
 
-client = redis.createClient(process.env.REDIS_URL);
+client = redis.createClient(process.env.REDIS_URL || '');
 
 load = require('express-load');
 
@@ -23,8 +23,7 @@ module.exports = function() {
   app.use(session({
     secret: 'pepo',
     store: new redisStore({
-      host: 'ec2-54-243-135-236.compute-1.amazonaws.com',
-      port: 10699,
+      url: process.env.REDIS_URL || 'http://localhost:6379/',
       client: client
     }),
     saveUninitialized: false,
