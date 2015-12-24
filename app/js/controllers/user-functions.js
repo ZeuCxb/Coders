@@ -4,7 +4,7 @@ request = require('request-coders-api');
 
 neo4j = require('neo4j');
 
-gdb = new neo4j.GraphDatabase(process.env.GRAPHENEDB_URL || 'http://localhost:7474/');
+gdb = new neo4j.GraphDatabase(process.env.GRAPHENEDB_URL || 'http://neo4j:Zeu16051997@localhost:7474');
 
 module.exports = function(app) {
   var controller, postSchema, userSchema;
