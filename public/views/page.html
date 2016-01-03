@@ -1,15 +1,18 @@
 <div class="container page" ng-controller="pageCtrl as ctrl">
 	<div class="jumbotron row">
 		<div class="col-xs-12">
-			<h1>{{ctrl.page.user.nick}}</h1>
-			<p ng-if="ctrl.page.my">Your page!</p>
-			<div ng-if="!ctrl.page.my" class="pull-right">
-				<span ng-if="ctrl.page.user.online" class="text-green">
-					(Online)
-				</span>
-				<span ng-if="!ctrl.page.user.online" class="text-red">
-					(Offline)
-				</span>
+			<span class="user-title">{{ctrl.page.user.nick}}</span>
+
+			<span ng-if="!ctrl.page.my && ctrl.page.user.online" class="text-green">
+				(Online)
+			</span>
+			<span ng-if="!ctrl.page.my && !ctrl.page.user.online" class="text-red">
+				(Offline)
+			</span>
+
+			<div>
+				<a class="pull-right link" ng-if="ctrl.page.my">Edit</a>
+				<span class="pull-right link" ng-if="!ctrl.page.my && ctrl.user">Fallow</span>
 			</div>
 		</div>
 	</div>

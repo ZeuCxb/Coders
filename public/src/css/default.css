@@ -3,3 +3,17 @@
 
 .text-red {
   color: #C0394D; }
+
+.text-capitalize {
+  text-transform: capitalize; }
+
+.link {
+  color: #FFF;
+  cursor: pointer; }
+  .link:hover {
+    color: #FFF;
+    text-decoration: underline; }
+
+.user-title {
+  color: #FFF;
+  font-size: 60px; }

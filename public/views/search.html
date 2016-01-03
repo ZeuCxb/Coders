@@ -4,6 +4,6 @@
   <a ng-repeat="user in ctrl.foundUsers" class="col-xs-4 users-result" ng-if="ctrl.foundUsers && ctrl.user._id != user._id" ng-href="#/page/{{user._id}}">
     <span class="text-center col-xs-12 hidden-xs"><i class="fa fa-user fa-3x"></i></span>
     <span class="text-center col-xs-12">{{user.nick}}</span>
-    <span class="text-center col-xs-12 hidden-xs">({{user.name}})</span>
+    <span class="text-center col-xs-12 hidden-xs text-capitalize">({{user.name | firstName}})</span>
   </a>
 </div>
