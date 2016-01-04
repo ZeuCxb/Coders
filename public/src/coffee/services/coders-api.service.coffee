@@ -1,7 +1,7 @@
 angular.module 'coders'
   .factory 'codersApi', [
   	'$q', '$http', '$window', 'CONFIG', ($q, $http, $window, CONFIG) ->
-      
+
       url = CONFIG.url
       urlLogOn = url + 'register'
       urlLogIn = url + 'login'
